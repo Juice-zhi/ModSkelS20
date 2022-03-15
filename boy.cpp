@@ -29,6 +29,7 @@ ModelerView* createSampleModel(int x, int y, int w, int h, char* label)
 void Boy::draw()
 {
 	int level = VAL(LEVEL);
+	int color = VAL(COLOR);
 	// This call takes care of a lot of the nasty projection 
 	// matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
@@ -73,7 +74,20 @@ void Boy::draw()
 
 	// draw the sample model
 	setAmbientColor(.0f, .0f, .0f);
-	setDiffuseColor(COLOR_GREEN);
+	switch (color) {
+		case 0:
+			setDiffuseColor(1.0f, 0.0f, 0.0f);
+			break;
+		case 1:
+			setDiffuseColor(0.0f, 0.0f, 1.0f);
+			break;
+		case 2:
+			setDiffuseColor(1.0f, 1.0f, 0.0f);
+			break;
+		case 3:
+			setDiffuseColor(COLOR_GREEN);
+			break;
+	}
 	glPushMatrix();
 	glTranslated(VAL(XPOS), VAL(YPOS), VAL(ZPOS));
 
@@ -176,6 +190,7 @@ int main()
 	controls[TOPHANGLE] = ModelerControl("Top Gun Horizontal Angle", -135, 135, 1, 0);
 	controls[TOPVANGLE] = ModelerControl("Top Gun Vertical Angel", -90, 90, 1, 0);
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 3, 1, 3);
+	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();

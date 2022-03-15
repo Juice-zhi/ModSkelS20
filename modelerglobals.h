@@ -10,7 +10,7 @@
 // of the controls from the user interface.
 enum SampleModelControls
 { 
-	XPOS, YPOS, ZPOS, TOPHANGLE, TOPVANGLE,LEVEL, NUMCONTROLS
+	XPOS, YPOS, ZPOS, TOPHANGLE, TOPVANGLE,LEVEL,COLOR, NUMCONTROLS
 };
 
 // Colors
