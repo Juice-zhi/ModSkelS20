@@ -100,7 +100,7 @@ void Boy::draw()
 	// draw wheel
 	if (level >= 1) {
 		glPushMatrix();
-		glTranslated(-1.4, 0.2, -1.7);
+		glTranslated(-1.5, 0.2, -1.7);
 		glRotated(-90, 0.0, 1.0, 0.0);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
@@ -119,7 +119,7 @@ void Boy::draw()
 		}
 
 		glRotated(180, 0.0, 1.0, 0.0);
-		glTranslated(0, 0, 2.8);
+		glTranslated(0, 0, 3);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
 			glPushMatrix();
@@ -173,8 +173,26 @@ void Boy::draw()
 			glPopMatrix();
 		}
 		glPopMatrix();
-		
-	}
+
+		glPushMatrix();
+		glTranslated(0, 2.5, 0);
+			glPushMatrix();
+			glTranslated(-1.5, 0, 0);
+			glRotated(-90, 0.0, 1.0, 1.0);
+			drawCylinder(3, 0.1, 0.1);
+			glTranslated(0, 0, 2);
+			drawSphere(2);
+			glRotated(90, 0.0, 1.0, 0.0);
+			glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
+			glRotated(VAL(LEFTHANGLE), 1.0, 0.0, 0.0);
+			drawCylinder(3, 2, 2);
+			glTranslated(0, 0, 3);
+			drawCylinder(VAL)
+			glPopMatrix();
+
+			glPushMatrix();
+			glPopMatrix();
+		glPopMatrix();
 	glPopMatrix();
 }
 
@@ -189,6 +207,9 @@ int main()
 	controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.01f, 0);
 	controls[TOPHANGLE] = ModelerControl("Top Gun Horizontal Angle", -135, 135, 1, 0);
 	controls[TOPVANGLE] = ModelerControl("Top Gun Vertical Angel", -90, 90, 1, 0);
+	controls[LEFTHANGLE] = ModelerControl("Left Gun Horizontal Angel", 0, 180, 1, 0);
+	controls[LEFTVANGLE] = ModelerControl("Left Gun Vertical Angel", -90, 90, 1, 0);
+	controls[LEFTGLENGTH] = ModelerControl("Left Inner Gun Legnth", -90, 90, 1, 0);
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 3, 1, 3);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 
