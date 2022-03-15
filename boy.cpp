@@ -72,7 +72,7 @@ void Boy::draw()
 	drawBox(10, 0.01f, 10);
 	glPopMatrix();*/
 
-	// draw the sample model
+	// draw the model
 	setAmbientColor(.0f, .0f, .0f);
 	switch (color) {
 		case 0:
@@ -143,28 +143,28 @@ void Boy::draw()
 		glPushMatrix();
 		glRotated(VAL(TOPHANGLE), 0.0, 1.0, 0.0);
 		glTranslated(0, 5, 0);
-		glPushMatrix();
-		glTranslated(1, 0, 1);
-		glRotated(-90, 1.0, 0.0, 0.0);
-		drawBox(0.1, 2, 1);
-		glPopMatrix();
-		
+			glPushMatrix();
+			glTranslated(1, 0, 1);
+			glRotated(-90, 1.0, 0.0, 0.0);
+			drawBox(0.1, 2, 1);
+			glPopMatrix();
 
-		glPushMatrix();
-		glTranslated(-1, 0, -1);
-		glRotated(-90, 1.0, 0.0, 0.0);
-		drawBox(-0.1, -2, 1);
-		glPopMatrix();
+
+			glPushMatrix();
+			glTranslated(-1, 0, -1);
+			glRotated(-90, 1.0, 0.0, 0.0);
+			drawBox(-0.1, -2, 1);
+			glPopMatrix();
 		if (level >= 2) {
 			glPushMatrix();
-			glTranslated(1, 0.5, 0);
-			glRotated(-90, 0.0, 1.0, 0.0);
-			drawCylinder(2, 0.1, 0.1);
+				glTranslated(1, 0.5, 0);
+				glRotated(-90, 0.0, 1.0, 0.0);
+				drawCylinder(2, 0.1, 0.1);
 			glPopMatrix();
 
 			glPushMatrix();
-			glTranslated(0, 1, 0);
-			drawSphere(1);
+				glTranslated(0, 1, 0);
+				drawSphere(1);
 			if (level >= 3) {
 				glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
 				glRotated(-90, 1.0, 0.0, 0.0);
@@ -175,24 +175,36 @@ void Boy::draw()
 		glPopMatrix();
 
 		glPushMatrix();
-		glTranslated(0, 2.5, 0);
+			glTranslated(0, 3.5, 0);
 			glPushMatrix();
-			glTranslated(-1.5, 0, 0);
-			glRotated(-90, 0.0, 1.0, 1.0);
-			drawCylinder(3, 0.1, 0.1);
-			glTranslated(0, 0, 2);
-			drawSphere(2);
-			glRotated(90, 0.0, 1.0, 0.0);
-			glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
-			glRotated(VAL(LEFTHANGLE), 1.0, 0.0, 0.0);
-			drawCylinder(3, 2, 2);
-			glTranslated(0, 0, 3);
-			drawCylinder(VAL)
+				glTranslated(-1.5, 0, 0);
+				glRotated(-90, 0.0, 1.0, 0.0);
+				drawCylinder(VAL(LEFTGAP), 0.1, 0.1);
+				glTranslated(0, 0, VAL(LEFTGAP));
+				drawSphere(1);
+				glRotated(90, 0.0, 1.0, 0.0);
+				glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
+				glRotated(VAL(LEFTVANGLE), 1.0, 0.0, 0.0);
+				drawCylinder(3, 1, 1);
+				glTranslated(0, 0, 3);
+				drawCylinder(VAL(LEFTGLENGTH), 0.5, 0.5);
 			glPopMatrix();
 
 			glPushMatrix();
+				glTranslated(1.5, 0, 0);
+				glRotated(90, 0.0, 1.0, 0.0);
+				drawCylinder(VAL(RIGHTGAP), 0.1, 0.1);
+				glTranslated(0, 0, VAL(RIGHTGAP));
+				drawSphere(1);
+				glRotated(-90, 0.0, 1.0, 0.0);
+				glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
+				glRotated(VAL(RIGHTVANGLE), 1.0, 0.0, 0.0);
+				drawCylinder(3, 1, 1);
+				glTranslated(0, 0, 3);
+				drawCylinder(VAL(RIGHTGLENGTH), 0.5, 0.5);
 			glPopMatrix();
 		glPopMatrix();
+	}
 	glPopMatrix();
 }
 
@@ -208,9 +220,14 @@ int main()
 	controls[ZPOS] = ModelerControl("Z Position", -5, 5, 0.01f, 0);
 	controls[TOPHANGLE] = ModelerControl("Top Gun Horizontal Angle", -135, 135, 1, 0);
 	controls[TOPVANGLE] = ModelerControl("Top Gun Vertical Angel", -90, 90, 1, 0);
+	controls[LEFTGAP] = ModelerControl("Left Gun Gap", 2, 3, 0.01f, 2.5);
 	controls[LEFTHANGLE] = ModelerControl("Left Gun Horizontal Angel", 0, 180, 1, 0);
 	controls[LEFTVANGLE] = ModelerControl("Left Gun Vertical Angel", -90, 90, 1, 0);
-	controls[LEFTGLENGTH] = ModelerControl("Left Inner Gun Legnth", -90, 90, 1, 0);
+	controls[LEFTGLENGTH] = ModelerControl("Left Inner Gun Legnth", 0, 3, 0.01f, 1);
+	controls[RIGHTGAP] = ModelerControl("Right Gun Gap", 2, 3, 0.01f, 2.5);
+	controls[RIGHTHANGLE] = ModelerControl("Right Gun Horizontal Angel", 0, 180, 1, 0);
+	controls[RIGHTVANGLE] = ModelerControl("Right Gun Vertical Angel", -90, 90, 1, 0);
+	controls[RIGHTGLENGTH] = ModelerControl("Right Inner Gun Legnth", 0, 3, 0.01f, 1);
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 3, 1, 3);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 
