@@ -198,6 +198,7 @@ void Boy::draw()
 
 int main()
 {
+	
 	// Initialize the controls
 	// Constructor is ModelerControl(name, minimumvalue, maximumvalue, 
 	// stepsize, defaultvalue)
