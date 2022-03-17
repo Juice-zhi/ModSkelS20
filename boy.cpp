@@ -12,7 +12,9 @@ class Boy : public ModelerView
 {
 public:
     Boy(int x, int y, int w, int h, char* label)
-        : ModelerView(x, y, w, h, label) { }
+        : ModelerView(x, y, w, h, label) {
+		
+	}
 
     virtual void draw();
 };
@@ -30,6 +32,10 @@ void Boy::draw()
 {
 	int level = VAL(LEVEL);
 	int color = VAL(COLOR);
+	float color1[4] = {0.0,1.0,0.0,1.0};
+	float color2[4] = {1.0,0.0,0.0,1.0};
+	float color3[4] = {0.0,0.0,1.0,0.0};
+	
 	// This call takes care of a lot of the nasty projection 
 	// matrix stuff.  Unless you want to fudge directly with the 
 	// projection matrix, don't bother with this ...
@@ -97,40 +103,113 @@ void Boy::draw()
 	drawBox(1, 1, 1);
 	glPopMatrix();
 	
+	//texture
+	glEnable(GL_TEXTURE_2D);
 	// draw wheel
 	if (level >= 1) {
+		switch (color) {
+		case 0:
+			setDiffuseColor(0.0f, 1.0f, 0.0f);
+			break;
+		case 1:
+			setDiffuseColor(1.0f, 0.0f, 0.0f);
+			break;
+		case 2:
+			setDiffuseColor(0.0f, 0.0f, 1.0f);
+			break;
+		case 3:
+			setDiffuseColor(1.0f,1.0f,0.0f);
+			break;
+		}
 		glPushMatrix();
 		glTranslated(-1.5, 0.2, -1.7);
 		glRotated(-90, 0.0, 1.0, 0.0);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
+			switch (color) {
+			case 0:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 1:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			}
 			glPushMatrix();
 			glTranslated(0, 0, 0.3);
 			drawCylinder(1, 1, 1);
 			glPopMatrix();
 		}
+		setDiffuseColor(color1[color], color2[color], color3[color]);
 		glTranslated(3.4, 0, 0);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
+			switch (color) {
+			case 0:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 1:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			}
 			glPushMatrix();
 			glTranslated(0, 0, 0.3);
 			drawCylinder(1, 1, 1);
 			glPopMatrix();
 		}
-
+		setDiffuseColor(color1[color], color2[color], color3[color]);
 		glRotated(180, 0.0, 1.0, 0.0);
 		glTranslated(0, 0, 3);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
+			switch (color) {
+			case 0:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 1:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			}
 			glPushMatrix();
 			glTranslated(0, 0, 0.3);
 			drawCylinder(1, 1, 1);
 			glPopMatrix();
 		}
-
+		setDiffuseColor(color1[color], color2[color], color3[color]);
 		glTranslated(3.4, 0, 0);
 		drawCylinder(1, 0.1, 0.1);
 		if (level >= 2) {
+			switch (color) {
+			case 0:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 1:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			}
 			glPushMatrix();
 			glTranslated(0, 0, 0.3);
 			drawCylinder(1, 1, 1);
@@ -139,7 +218,7 @@ void Boy::draw()
 		glPopMatrix();
 
 		// draw cannon
-
+		setDiffuseColor(color1[color], color2[color], color3[color]);
 		glPushMatrix();
 		glRotated(VAL(TOPHANGLE), 0.0, 1.0, 0.0);
 		glTranslated(0, 5, 0);
@@ -156,6 +235,20 @@ void Boy::draw()
 			drawBox(-0.1, -2, 1);
 			glPopMatrix();
 		if (level >= 2) {
+			switch (color) {
+			case 0:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 1:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			}
 			glPushMatrix();
 				glTranslated(1, 0.5, 0);
 				glRotated(-90, 0.0, 1.0, 0.0);
@@ -166,6 +259,20 @@ void Boy::draw()
 				glTranslated(0, 1, 0);
 				drawSphere(1);
 			if (level >= 3) {
+				switch (color) {
+				case 0:
+					setDiffuseColor(0.0f, 0.0f, 1.0f);
+					break;
+				case 1:
+					setDiffuseColor(1.0f, 1.0f, 0.0f);
+					break;
+				case 2:
+					setDiffuseColor(0.0f, 1.0f, 0.0f);
+					break;
+				case 3:
+					setDiffuseColor(1.0f, 0.0f, 0.0f);
+					break;
+				}
 				glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
 				glRotated(-90, 1.0, 0.0, 0.0);
 				drawCylinder(2, 1, 1);
@@ -173,35 +280,131 @@ void Boy::draw()
 			glPopMatrix();
 		}
 		glPopMatrix();
-
+		setDiffuseColor(color1[color], color2[color], color3[color]);
 		glPushMatrix();
 			glTranslated(0, 3.5, 0);
 			glPushMatrix();
 				glTranslated(-1.5, 0, 0);
 				glRotated(-90, 0.0, 1.0, 0.0);
 				drawCylinder(VAL(LEFTGAP), 0.1, 0.1);
-				glTranslated(0, 0, VAL(LEFTGAP));
-				drawSphere(1);
-				glRotated(90, 0.0, 1.0, 0.0);
-				glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
-				glRotated(VAL(LEFTVANGLE), 1.0, 0.0, 0.0);
-				drawCylinder(3, 1, 1);
-				glTranslated(0, 0, 3);
-				drawCylinder(VAL(LEFTGLENGTH), 0.5, 0.5);
+				if (level >= 2) {
+					switch (color) {
+					case 0:
+						setDiffuseColor(1.0f, 1.0f, 0.0f);
+						break;
+					case 1:
+						setDiffuseColor(0.0f, 1.0f, 0.0f);
+						break;
+					case 2:
+						setDiffuseColor(1.0f, 0.0f, 0.0f);
+						break;
+					case 3:
+						setDiffuseColor(0.0f, 0.0f, 1.0f);
+						break;
+					}
+					glTranslated(0, 0, VAL(LEFTGAP));
+					drawSphere(1);
+					if (level >= 3) {
+						switch (color) {
+						case 0:
+							setDiffuseColor(0.0f, 0.0f, 1.0f);
+							break;
+						case 1:
+							setDiffuseColor(1.0f, 1.0f, 0.0f);
+							break;
+						case 2:
+							setDiffuseColor(0.0f, 1.0f, 0.0f);
+							break;
+						case 3:
+							setDiffuseColor(1.0f, 0.0f, 0.0f);
+							break;
+						}
+						glRotated(90, 0.0, 1.0, 0.0);
+						glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
+						glRotated(VAL(LEFTVANGLE), 1.0, 0.0, 0.0);
+						drawCylinder(3, 1, 1);
+						if (level >= 4) {
+							switch (color) {
+							case 0:
+								setDiffuseColor(1.0f, 0.0f, 0.0f);
+								break;
+							case 1:
+								setDiffuseColor(0.0f, 0.0f, 1.0f);
+								break;
+							case 2:
+								setDiffuseColor(1.0f, 1.0f, 0.0f);
+								break;
+							case 3:
+								setDiffuseColor(0.0f, 1.0f, 0.0f);
+								break;
+							}
+							glTranslated(0, 0, 3);
+							drawCylinder(VAL(LEFTGLENGTH), 0.5, 0.5);
+						}
+					}
+				}
 			glPopMatrix();
-
+			setDiffuseColor(color1[color], color2[color], color3[color]);
 			glPushMatrix();
 				glTranslated(1.5, 0, 0);
 				glRotated(90, 0.0, 1.0, 0.0);
 				drawCylinder(VAL(RIGHTGAP), 0.1, 0.1);
 				glTranslated(0, 0, VAL(RIGHTGAP));
-				drawSphere(1);
-				glRotated(-90, 0.0, 1.0, 0.0);
-				glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
-				glRotated(VAL(RIGHTVANGLE), 1.0, 0.0, 0.0);
-				drawCylinder(3, 1, 1);
-				glTranslated(0, 0, 3);
-				drawCylinder(VAL(RIGHTGLENGTH), 0.5, 0.5);
+				if (level >= 2) {
+					switch (color) {
+					case 0:
+						setDiffuseColor(1.0f, 1.0f, 0.0f);
+						break;
+					case 1:
+						setDiffuseColor(0.0f, 1.0f, 0.0f);
+						break;
+					case 2:
+						setDiffuseColor(1.0f, 0.0f, 0.0f);
+						break;
+					case 3:
+						setDiffuseColor(0.0f, 0.0f, 1.0f);
+						break;
+					}
+					drawSphere(1);
+					if (level >= 3) {
+						switch (color) {
+						case 0:
+							setDiffuseColor(0.0f, 0.0f, 1.0f);
+							break;
+						case 1:
+							setDiffuseColor(1.0f, 1.0f, 0.0f);
+							break;
+						case 2:
+							setDiffuseColor(0.0f, 1.0f, 0.0f);
+							break;
+						case 3:
+							setDiffuseColor(1.0f, 0.0f, 0.0f);
+							break;
+						}
+						glRotated(-90, 0.0, 1.0, 0.0);
+						glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
+						glRotated(VAL(RIGHTVANGLE), 1.0, 0.0, 0.0);
+						drawCylinder(3, 1, 1);
+						if (level >= 4) {
+							switch (color) {
+							case 0:
+								setDiffuseColor(1.0f, 0.0f, 0.0f);
+								break;
+							case 1:
+								setDiffuseColor(0.0f, 0.0f, 1.0f);
+								break;
+							case 2:
+								setDiffuseColor(1.0f, 1.0f, 0.0f);
+								break;
+							case 3:
+								setDiffuseColor(0.0f, 1.0f, 0.0f);
+								break;
+							}
+							glTranslated(0, 0, 3);
+							drawCylinder(VAL(RIGHTGLENGTH), 0.5, 0.5);
+						}
+					}
+				}
 			glPopMatrix();
 		glPopMatrix();
 	}
@@ -228,7 +431,7 @@ int main()
 	controls[RIGHTHANGLE] = ModelerControl("Right Gun Horizontal Angel", 0, 180, 1, 0);
 	controls[RIGHTVANGLE] = ModelerControl("Right Gun Vertical Angel", -90, 90, 1, 0);
 	controls[RIGHTGLENGTH] = ModelerControl("Right Inner Gun Legnth", 0, 3, 0.01f, 1);
-	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 3, 1, 3);
+	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 4, 1, 4);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
