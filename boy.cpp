@@ -278,9 +278,16 @@ void Boy::draw()
 					setDiffuseColor(1.0f, 0.0f, 0.0f);
 					break;
 				}
-				glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
-				glRotated(-90, 1.0, 0.0, 0.0);
-				drawCylinder(2, 1, 1);
+				if (VAL(AIM) == 0) {
+					glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
+					glRotated(-90, 1.0, 0.0, 0.0);
+					drawCylinder(2, 1, 1);
+				}
+				else {
+					glRotated(-90, 1.0, 0.0, 0.0);
+					glRotated(VAL(AIM) * 90 / 100, 1.0, 0.0, 0.0);
+					drawCylinder(2, 1, 1);
+				}
 			}
 			glPopMatrix();
 		}
@@ -325,8 +332,15 @@ void Boy::draw()
 							break;
 						}
 						glRotated(90, 0.0, 1.0, 0.0);
-						glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
-						glRotated(VAL(LEFTVANGLE), 1.0, 0.0, 0.0);
+						if (VAL(AIM) == 0) {
+							glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
+							glRotated(VAL(LEFTVANGLE), 1.0, 0.0, 0.0);
+						}
+						else {
+							glRotated(90, 1.0, 0.0, 0.0);
+							glRotated(-VAL(AIM) * 90 / 100, 1.0, 0.0, 0.0);
+							glRotated(VAL(AIM) * 15 / 100, 0.0, 1.0, 0.0);
+						}
 						drawCylinder(3, 1, 1);
 						if (level >= 4) {
 							switch (color) {
@@ -344,7 +358,12 @@ void Boy::draw()
 								break;
 							}
 							glTranslated(0, 0, 3);
-							drawCylinder(VAL(LEFTGLENGTH), 0.5, 0.5);
+							if (VAL(AIM) == 0) {
+								drawCylinder(VAL(LEFTGLENGTH), 0.5, 0.5);
+							}
+							else {
+								drawCylinder(VAL(AIM) * 3 / 100, 0.5, 0.5);
+							}
 						}
 					}
 				}
@@ -387,8 +406,15 @@ void Boy::draw()
 							break;
 						}
 						glRotated(-90, 0.0, 1.0, 0.0);
-						glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
-						glRotated(VAL(RIGHTVANGLE), 1.0, 0.0, 0.0);
+						if (VAL(AIM) == 0) {
+							glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
+							glRotated(VAL(RIGHTVANGLE), 1.0, 0.0, 0.0);
+						}
+						else {
+							glRotated(90, 1.0, 0.0, 0.0);
+							glRotated(-VAL(AIM) * 90 / 100, 1.0, 0.0, 0.0);
+							glRotated(-VAL(AIM) * 15 / 100, 0.0, 1.0, 0.0);
+						}
 						drawCylinder(3, 1, 1);
 						if (level >= 4) {
 							switch (color) {
@@ -406,7 +432,12 @@ void Boy::draw()
 								break;
 							}
 							glTranslated(0, 0, 3);
-							drawCylinder(VAL(RIGHTGLENGTH), 0.5, 0.5);
+							if (VAL(AIM) == 0) {
+								drawCylinder(VAL(RIGHTGLENGTH), 0.5, 0.5);
+							}
+							else {
+								drawCylinder(VAL(AIM) * 3 / 100, 0.5, 0.5);
+							}
 						}
 					}
 				}
@@ -430,12 +461,13 @@ int main()
 	controls[TOPVANGLE] = ModelerControl("Top Gun Vertical Angel", -90, 90, 1, 0);
 	controls[LEFTGAP] = ModelerControl("Left Gun Gap", 2, 3, 0.01f, 2.5);
 	controls[LEFTHANGLE] = ModelerControl("Left Gun Horizontal Angel", 0, 180, 1, 0);
-	controls[LEFTVANGLE] = ModelerControl("Left Gun Vertical Angel", -90, 90, 1, 0);
-	controls[LEFTGLENGTH] = ModelerControl("Left Inner Gun Legnth", 0, 3, 0.01f, 1);
+	controls[LEFTVANGLE] = ModelerControl("Left Gun Vertical Angel", -90, 90, 1, 90);
+	controls[LEFTGLENGTH] = ModelerControl("Left Inner Gun Legnth", 0, 3, 0.01f, 0);
 	controls[RIGHTGAP] = ModelerControl("Right Gun Gap", 2, 3, 0.01f, 2.5);
 	controls[RIGHTHANGLE] = ModelerControl("Right Gun Horizontal Angel", 0, 180, 1, 0);
-	controls[RIGHTVANGLE] = ModelerControl("Right Gun Vertical Angel", -90, 90, 1, 0);
-	controls[RIGHTGLENGTH] = ModelerControl("Right Inner Gun Legnth", 0, 3, 0.01f, 1);
+	controls[RIGHTVANGLE] = ModelerControl("Right Gun Vertical Angel", -90, 90, 1, 90);
+	controls[RIGHTGLENGTH] = ModelerControl("Right Inner Gun Legnth", 0, 3, 0.01f, 0);
+	controls[AIM] = ModelerControl("Aim", 0, 100, 1, 0);
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 4, 1, 4);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 	controls[LIGHT] = ModelerControl("Change the light intensity", 0, 5, 0.01f, 1);
