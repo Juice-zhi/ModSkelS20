@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctime>
+#include<chrono>
 
 #define STB_IMAGE_IMPLEMENTATION
 // To make a SampleModel, we inherit off of ModelerView
@@ -30,6 +31,12 @@ public:
 ModelerView* createSampleModel(int x, int y, int w, int h, char* label)
 {
     return new Boy(x, y, w, h, label);
+}
+int getTime() {
+	using namespace std::chrono;
+	auto now = system_clock::now();
+	auto integral_duration = now.time_since_epoch().count();
+	return integral_duration;
 }
 
 GLuint loadBMP_custom(const char* imagepath) {
@@ -377,9 +384,23 @@ void Boy::draw()
 			if (level >= 3) {
 				
 				if (VAL(AIM) == 0) {
-					glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
-					glRotated(-90, 1.0, 0.0, 0.0);
-					drawCylinder(2, 1, 1);
+					if (VAL(ANIMATE) == 1) {
+						int time = getTime();
+						double angle = abs(time % 40000000) * 0.000009;
+						if (angle < 180) {
+							glRotated(angle - 90, 1.0, 0.0, 0.0);
+						}
+						else {
+							glRotated(360-angle - 90, 1.0, 0.0, 0.0);
+						}
+						glRotated(-90, 1.0, 0.0, 0.0);
+						drawCylinder(2, 1, 1);
+					}
+					else {
+						glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
+						glRotated(-90, 1.0, 0.0, 0.0);
+						drawCylinder(2, 1, 1);
+					}
 				}
 				else {
 					glRotated(-90, 1.0, 0.0, 0.0);
@@ -543,6 +564,7 @@ int main()
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 4, 1, 4);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 	controls[LIGHT] = ModelerControl("Change the light intensity", 0, 5, 0.01f, 1);
+	controls[ANIMATE] = ModelerControl("Enable animate", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
