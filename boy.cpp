@@ -9,6 +9,7 @@
 #include <GL/gl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctime>
 
 #define STB_IMAGE_IMPLEMENTATION
 // To make a SampleModel, we inherit off of ModelerView
