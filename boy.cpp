@@ -39,40 +39,15 @@ int getTime() {
 	return integral_duration;
 }
 
-GLuint loadBMP_custom(const char* imagepath) {
-	unsigned char header[54]; // Each BMP file begins by a 54-bytes header
-	unsigned int dataPos;     // Position in the file where the actual data begins
-	unsigned int width, height;
-	unsigned int imageSize;   // = width*height*3
-	unsigned char* data;
-	FILE* file = fopen(imagepath, "rb");
-	if (!file)
-	{
-		return 0;
-	}
-	if (fread(header, 1, 54, file) != 54) { // If not 54 bytes read : problem
-		return false;
-	}
-	if (header[0] != 'B' || header[1] != 'M') {
-		return 0;
-	}
-	dataPos = *(int*)&(header[0x0A]);
-	imageSize = *(int*)&(header[0x22]);
-	width = *(int*)&(header[0x12]);
-	height = *(int*)&(header[0x16]);
-	if (imageSize == 0)    imageSize = width * height * 3;
-	if (dataPos == 0)      dataPos = 54;
-	data = new unsigned char[imageSize];
-	fread(data, 1, imageSize, file);
-	fclose(file);
-	GLuint textureID;
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	return textureID;
-}
+//GLuint loadBMP_custom(const char* imagepath) {
+//	GLuint textureID;
+//	glGenTextures(1, &textureID);
+//	glBindTexture(GL_TEXTURE_2D, textureID);
+//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//	return textureID;
+//}
 
 // We are going to override (is that the right word?) the draw()
 // method of ModelerView to draw out SampleModel
@@ -233,9 +208,18 @@ void Boy::draw()
 	glScaled(3, 5, 4);
 	drawBox(1, 1, 1);
 	glPopMatrix();
-	
-	//texture
+
+	/*GLuint image = loadBMP_custom("ferry.bmp");
 	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	glNormal3d(0.0, 0.0, -1.0);
+	glTexCoord2f(0.0, 0.0); glVertex3d(-1.5, 0, 2.0);
+	glTexCoord2f(1.0, 0.0); glVertex3d(1.5, 0, 2.0);
+	glTexCoord2f(1.0, 1.0); glVertex3d(1.5, 5, 2.0);
+	glTexCoord2f(0.0, 1.0); glVertex3d(-1.5, 5, 2.0);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);*/
+
 	// draw wheel
 	if (level >= 1) {
 		switch (color) {
