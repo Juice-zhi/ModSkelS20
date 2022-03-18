@@ -84,6 +84,70 @@ void Boy::draw()
 	drawBox(10, 0.01f, 10);
 	glPopMatrix();*/
 
+	//draw complex shape
+	//setDiffuseColor(0.0f, 0.5f, 0.0f);
+	setDiffuseColor(1.0f, 1.0f, 1.0f);
+	glBegin(GL_QUADS);
+	glVertex3d(0, 0, 5);
+	glVertex3d(0, 0, 6);
+	glVertex3d(1, 0, 6);
+	glVertex3d(1, 0, 5);
+
+	//glVertex3d(0, 1, 6);
+	//glVertex3d(0, 0, 6);
+	//glVertex3d(1, 0, 6);
+	//glVertex3d(1, 1, 6);
+
+	//glVertex3d(0, 1, 5);
+	//glVertex3d(0, 1, 6);
+	//glVertex3d(1, 1, 6);
+	//glVertex3d(1, 1, 5);
+
+	//glVertex3d(1, 1, 5);
+	//glVertex3d(1, 1, 6);
+	//glVertex3d(1, 0, 6);
+	//glVertex3d(1, 0, 5);
+
+	//glVertex3d(0, 0, 5);
+	//glVertex3d(0, 0, 6);
+	//glVertex3d(0, 1, 6);
+	//glVertex3d(0, 1, 5);
+
+	//glVertex3d(0, 0, 5);
+	//glVertex3d(0, 1, 5);
+	//glVertex3d(1, 1, 5);
+	//glVertex3d(1, 0, 5);
+	glEnd();
+
+	glBegin(GL_TRIANGLES);
+	setDiffuseColor(0.75f, 0.5f, 0.0f);
+	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
+	glVertex3d(0, 1, 6);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
+	glVertex3d(0, 1, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
+	glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
+
+	//setDiffuseColor(0.0f, 0.5f, 0.0f);
+	setDiffuseColor(1.0f, 1.0f, 1.0f);
+	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
+	glVertex3d(0, 1, 6);glVertex3d(0, 0, 6);glVertex3d(0.5, 0.5, 8);
+	glVertex3d(0, 0, 6);glVertex3d(1, 0, 6);glVertex3d(0.5, 0.5, 8);
+	glVertex3d(1, 0, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
+
+	glVertex3d(0, 0, 5);glVertex3d(0, 0, 6);glVertex3d(-2, 0.5, 5.5);
+	glVertex3d(0, 0, 6);glVertex3d(0, 1, 6);glVertex3d(-2, 0.5, 5.5);
+	glVertex3d(0, 1, 6);glVertex3d(0, 1, 5);glVertex3d(-2, 0.5, 5.5);
+	glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(-2, 0.5, 5.5);
+
+	glVertex3d(1, 0, 6);glVertex3d(1, 0, 5);glVertex3d(3, 0.5, 5.5);
+	glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(3, 0.5, 5.5);
+	glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(3, 0.5, 5.5);
+	glVertex3d(1, 1, 6);glVertex3d(1, 0, 6);glVertex3d(3, 0.5, 5.5);
+
+	glVertex3d(0, 0, 5);glVertex3d(1, 0, 5);glVertex3d(0.5, 0.5, 3);
+	glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 0.5, 3);
+	glVertex3d(1, 1, 5);glVertex3d(0, 1, 5);glVertex3d(0.5, 0.5, 3);
+	glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(0.5, 0.5, 3);
+	glEnd();
 	// draw the model
 	setAmbientColor(.0f, .0f, .0f);
 	switch (color) {
