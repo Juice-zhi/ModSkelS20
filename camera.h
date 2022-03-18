@@ -23,6 +23,7 @@ protected:
     
     Vec3f		mPosition;
     Vec3f		mUpVector;
+    Vec3f       newNormal;
     bool		mDirtyTransform;
     
     void calculateViewingTransformParameters();
@@ -83,6 +84,14 @@ public:
 
 	// gluLookAt equivalent
 	void lookAt(Vec3f eye, Vec3f at, Vec3f up);
+    void changeNormalVector(float angle);
+    inline Vec3f getEye() {
+        return mPosition;
+    }
+    inline Vec3f getUp() {
+        return newNormal;
+    }
+
 };
 
 #endif
