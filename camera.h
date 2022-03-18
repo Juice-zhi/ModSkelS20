@@ -3,6 +3,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "modelerglobals.h"
 #include "vec.h"
 #include "mat.h"
 
@@ -87,6 +88,9 @@ public:
     void changeNormalVector(float angle);
     inline Vec3f getEye() {
         return mPosition;
+    }
+    inline void setEye(const Vec3f &position) {
+        mPosition = position; mDirtyTransform = true;
     }
     inline Vec3f getUp() {
         return newNormal;

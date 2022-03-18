@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
-
+#include "modelerglobals.h"
 #include "camera.h"
 
 #pragma warning(push)
@@ -13,7 +13,7 @@
 #ifndef M_PI
 #define M_PI 3.141592653589793238462643383279502
 #endif 
-
+int frameall = 0;
 const float kMouseRotationSensitivity		= 1.0f/90.0f;
 const float kMouseTranslationXSensitivity	= 0.03f;
 const float kMouseTranslationYSensitivity	= 0.03f;
@@ -164,7 +164,7 @@ void Camera::dragMouse( int x, int y )
 			break;
 		}
 	case kActionTwist:
-		// Not implemented
+		// Not implemented  I write my own function to deal with that !!!!!!!!!!!!!!!!!!
 	default:
 		break;
 	}
@@ -183,6 +183,7 @@ void Camera::applyViewingTransform() {
 
 	// Place the camera at mPosition, aim the camera at
 	// mLookAt, and twist the camera such that mUpVector is up
+	
 	lookAt(mPosition, mLookAt, newNormal);
 	
 }

@@ -13,13 +13,13 @@
 #include<chrono>
 
 #define STB_IMAGE_IMPLEMENTATION
+//int frameall = 0;
 // To make a SampleModel, we inherit off of ModelerView
 class Boy : public ModelerView
 {
 public:
     Boy(int x, int y, int w, int h, char* label)
         : ModelerView(x, y, w, h, label) {
-
 		
 	}
 
@@ -114,14 +114,23 @@ void Boy::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//if (VAL(FRAMEALL) != frameall) {
+		//frameall = VAL(FRAMEALL);
+	
+		//m_camera->setEye(2 * m_camera->getEye());
+		
+	//}
+	//else {
+		//m_camera->applyViewingTransform();
+	//}
 	m_camera->applyViewingTransform();
-
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
 	
 	GLuint image = loadBMP_custom("ferry.bmp");
+	
 	
 	if (mine == 1) {
 		//draw complex shape
@@ -581,6 +590,7 @@ int main()
 	controls[ANIMATE] = ModelerControl("Enable animate", 0, 1, 1, 0);
 	controls[LANDMINE] = ModelerControl("Lay mine", 0, 1, 1, 1);
 	controls[SURRENDER] = ModelerControl("Surrender", 0, 1, 1, 0);
+	controls[FRAMEALL] = ModelerControl("change value to frame", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
