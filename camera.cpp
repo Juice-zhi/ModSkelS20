@@ -106,9 +106,9 @@ Camera::Camera()
 	mElevation = 0.2f;
 	mAzimuth = (float)M_PI;
 
-	mLookAt = Vec3f( 0, 0, 0 );
+	mLookAt = Vec3f( 0, 3, 0 );
 	mCurrentMouseAction = kActionNone;
-
+	newNormal = Vec3f(0, 1, 0);
 	calculateViewingTransformParameters();
 }
 
@@ -154,8 +154,10 @@ void Camera::dragMouse( int x, int y )
 		}
 	case kActionZoom:
 		{
+			float changeNormal = -mouseDelta[0]* kMouseRotationSensitivity;
 			float dDolly = -mouseDelta[1] * kMouseZoomSensitivity;
 			setDolly(getDolly() + dDolly);
+			changeNormalVector(changeNormal);
 			break;
 		}
 	case kActionTwist:
@@ -181,6 +183,19 @@ void Camera::applyViewingTransform() {
 	gluLookAt(	mPosition[0], mPosition[1], mPosition[2],
 				mLookAt[0],   mLookAt[1],   mLookAt[2],
 				mUpVector[0], mUpVector[1], mUpVector[2]);
+	
+}
+void Camera::lookAt(Vec3f eye, Vec3f at, Vec3f up) {
+	if (mDirtyTransform)
+		calculateViewingTransformParameters();
+	gluLookAt(eye[0], eye[1], eye[2],
+		at[0],at[1], at[2],
+		up[0], up[1], up[2]);
+}
+void Camera::changeNormalVector(float angle) {
+	Mat4f transMatrix;
+	MakeHRotZ(transMatrix, angle);
+	newNormal = transMatrix * newNormal;
 }
 
 #pragma warning(pop)

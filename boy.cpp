@@ -6,13 +6,18 @@
 #include <GL/glu.h>
 #include "modelerglobals.h"
 #include "camera.h"
+#include <GL/gl.h>
+#include <stdlib.h>
+#include <stdio.h>
 
+#define STB_IMAGE_IMPLEMENTATION
 // To make a SampleModel, we inherit off of ModelerView
 class Boy : public ModelerView
 {
 public:
     Boy(int x, int y, int w, int h, char* label)
         : ModelerView(x, y, w, h, label) {
+
 		
 	}
 
@@ -64,7 +69,7 @@ void Boy::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_camera->applyViewingTransform();
+	m_camera->lookAt(m_camera->getEye(),m_camera->getLookAt(),m_camera->getUp());
 
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
