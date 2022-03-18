@@ -1,6 +1,9 @@
 #include <windows.h>
 #include <Fl/gl.h>
 #include <gl/glu.h>
+#include <iostream>
+#include <cstring>
+#include <cmath>
 
 #include "camera.h"
 
@@ -180,18 +183,44 @@ void Camera::applyViewingTransform() {
 
 	// Place the camera at mPosition, aim the camera at
 	// mLookAt, and twist the camera such that mUpVector is up
-	gluLookAt(	mPosition[0], mPosition[1], mPosition[2],
-				mLookAt[0],   mLookAt[1],   mLookAt[2],
-				mUpVector[0], mUpVector[1], mUpVector[2]);
+	lookAt(mPosition, mLookAt, newNormal);
 	
 }
-void Camera::lookAt(Vec3f eye, Vec3f at, Vec3f up) {
-	if (mDirtyTransform)
-		calculateViewingTransformParameters();
-	gluLookAt(eye[0], eye[1], eye[2],
-		at[0],at[1], at[2],
-		up[0], up[1], up[2]);
+
+void Camera::lookAt(Vec3f mPosition, Vec3f mLookAt, Vec3f mUpVector) {
+	GLdouble Mat[16];
+	memset(Mat, 0, sizeof(Mat));
+	Mat[15] = 1;
+	Vec3f forward(mLookAt[0] - mPosition[0], mLookAt[1] - mPosition[1], mLookAt[2] - mPosition[2]);
+	Vec3f up(mUpVector[0], mUpVector[1], mUpVector[2]);
+
+	GLdouble tmp = sqrt(forward[0] * forward[0] + forward[1] * forward[1] + forward[2] * forward[2]);
+	forward[0] = forward[0] / tmp;
+	forward[1] = forward[1] / tmp;
+	forward[2] = forward[2] / tmp;
+
+	Vec3f side = Vec3f(forward[1] * up[2] - forward[2] * up[1], forward[2] * up[0] - forward[0] * up[2], forward[0] * up[1] - forward[1] * up[0]);
+
+	tmp = sqrt(side[0] * side[0] + side[1] * side[1] + side[2] * side[2]);
+	side[0] = side[0] / tmp;
+	side[1] = side[1] / tmp;
+	side[2] = side[2] / tmp;
+
+	up = Vec3f(side[1] * forward[2] - side[2] * forward[1], side[2] * forward[0] - side[0] * forward[2], side[0] * forward[1] - side[1] * forward[0]);
+
+	Mat[0] = side[0];
+	Mat[4] = side[1];
+	Mat[8] = side[2];
+	Mat[1] = up[0];
+	Mat[5] = up[1];
+	Mat[9] = up[2];
+	Mat[2] = -forward[0];
+	Mat[6] = -forward[1];
+	Mat[10] = -forward[2];
+	glLoadMatrixd(Mat);
+	glTranslated(-mPosition[0], -mPosition[1], -mPosition[2]);
 }
+
 void Camera::changeNormalVector(float angle) {
 	Mat4f transMatrix;
 	MakeHRotZ(transMatrix, angle);

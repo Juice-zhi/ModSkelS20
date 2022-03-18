@@ -69,7 +69,7 @@ void Boy::draw()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	m_camera->lookAt(m_camera->getEye(),m_camera->getLookAt(),m_camera->getUp());
+	m_camera->applyViewingTransform();
 
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
