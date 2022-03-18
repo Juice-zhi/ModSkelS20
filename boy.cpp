@@ -228,16 +228,15 @@ void Boy::draw()
 		glRotated(VAL(TOPHANGLE), 0.0, 1.0, 0.0);
 		glTranslated(0, 5, 0);
 			glPushMatrix();
-			glTranslated(1, 0, 1);
-			glRotated(-90, 1.0, 0.0, 0.0);
-			drawBox(0.1, 2, 1);
+				glTranslated(1, 0, 1);
+				glRotated(-90, 1.0, 0.0, 0.0);
+				drawBox(0.1, 2, 1);
 			glPopMatrix();
 
-
 			glPushMatrix();
-			glTranslated(-1, 0, -1);
-			glRotated(-90, 1.0, 0.0, 0.0);
-			drawBox(-0.1, -2, 1);
+				glTranslated(-1, 0, -1);
+				glRotated(-90, 1.0, 0.0, 0.0);
+				drawBox(-0.1, -2, 1);
 			glPopMatrix();
 		if (level >= 2) {
 			switch (color) {
