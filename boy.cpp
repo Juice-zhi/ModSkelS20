@@ -104,7 +104,7 @@ void Boy::draw()
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
 	
-	GLuint image = loadBMP_custom("ferry.bmp");
+	//GLuint image = loadBMP_custom("ferry.bmp");
 	
 	
 	if (mine == 1) {
