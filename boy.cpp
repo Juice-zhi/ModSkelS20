@@ -85,8 +85,8 @@ void Boy::draw()
 	glPopMatrix();*/
 
 	//draw complex shape
-	//setDiffuseColor(0.0f, 0.5f, 0.0f);
-	setDiffuseColor(1.0f, 1.0f, 1.0f);
+	setDiffuseColor(0.75f, 0.5f, .0f);
+	//setAmbientColor(0.75f, 0.5f, 0.0f);
 	glBegin(GL_QUADS);
 	glVertex3d(0, 0, 5);
 	glVertex3d(0, 0, 6);
@@ -121,13 +121,14 @@ void Boy::draw()
 
 	glBegin(GL_TRIANGLES);
 	setDiffuseColor(0.75f, 0.5f, 0.0f);
+	
 	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
 	glVertex3d(0, 1, 6);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
 	glVertex3d(0, 1, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
 	glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
 
 	//setDiffuseColor(0.0f, 0.5f, 0.0f);
-	setDiffuseColor(1.0f, 1.0f, 1.0f);
+	setDiffuseColor(0.75f, 0.5f, .0f);
 	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
 	glVertex3d(0, 1, 6);glVertex3d(0, 0, 6);glVertex3d(0.5, 0.5, 8);
 	glVertex3d(0, 0, 6);glVertex3d(1, 0, 6);glVertex3d(0.5, 0.5, 8);
@@ -325,23 +326,24 @@ void Boy::draw()
 			glPopMatrix();
 
 			glPushMatrix();
+			switch (color) {
+			case 0:
+				setDiffuseColor(0.0f, 0.0f, 1.0f);
+				break;
+			case 1:
+				setDiffuseColor(1.0f, 1.0f, 0.0f);
+				break;
+			case 2:
+				setDiffuseColor(0.0f, 1.0f, 0.0f);
+				break;
+			case 3:
+				setDiffuseColor(1.0f, 0.0f, 0.0f);
+				break;
+			}
 				glTranslated(0, 1, 0);
 				drawSphere(1);
 			if (level >= 3) {
-				switch (color) {
-				case 0:
-					setDiffuseColor(0.0f, 0.0f, 1.0f);
-					break;
-				case 1:
-					setDiffuseColor(1.0f, 1.0f, 0.0f);
-					break;
-				case 2:
-					setDiffuseColor(0.0f, 1.0f, 0.0f);
-					break;
-				case 3:
-					setDiffuseColor(1.0f, 0.0f, 0.0f);
-					break;
-				}
+				
 				if (VAL(AIM) == 0) {
 					glRotated(VAL(TOPVANGLE), 1.0, 0.0, 0.0);
 					glRotated(-90, 1.0, 0.0, 0.0);
@@ -381,20 +383,7 @@ void Boy::draw()
 					glTranslated(0, 0, VAL(LEFTGAP));
 					drawSphere(1);
 					if (level >= 3) {
-						switch (color) {
-						case 0:
-							setDiffuseColor(0.0f, 0.0f, 1.0f);
-							break;
-						case 1:
-							setDiffuseColor(1.0f, 1.0f, 0.0f);
-							break;
-						case 2:
-							setDiffuseColor(0.0f, 1.0f, 0.0f);
-							break;
-						case 3:
-							setDiffuseColor(1.0f, 0.0f, 0.0f);
-							break;
-						}
+						
 						glRotated(90, 0.0, 1.0, 0.0);
 						if (VAL(AIM) == 0) {
 							glRotated(-VAL(LEFTHANGLE), 0.0, 1.0, 0.0);
@@ -455,20 +444,7 @@ void Boy::draw()
 					}
 					drawSphere(1);
 					if (level >= 3) {
-						switch (color) {
-						case 0:
-							setDiffuseColor(0.0f, 0.0f, 1.0f);
-							break;
-						case 1:
-							setDiffuseColor(1.0f, 1.0f, 0.0f);
-							break;
-						case 2:
-							setDiffuseColor(0.0f, 1.0f, 0.0f);
-							break;
-						case 3:
-							setDiffuseColor(1.0f, 0.0f, 0.0f);
-							break;
-						}
+						
 						glRotated(-90, 0.0, 1.0, 0.0);
 						if (VAL(AIM) == 0) {
 							glRotated(VAL(RIGHTHANGLE), 0.0, 1.0, 0.0);
