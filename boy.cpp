@@ -37,6 +37,7 @@ void Boy::draw()
 {
 	int level = VAL(LEVEL);
 	int color = VAL(COLOR);
+	float lightIntensity = VAL(LIGHT);
 	float color1[4] = {0.0,1.0,0.0,1.0};
 	float color2[4] = {1.0,0.0,0.0,1.0};
 	float color3[4] = {0.0,0.0,1.0,0.0};
@@ -46,10 +47,10 @@ void Boy::draw()
 	// projection matrix, don't bother with this ...
 
 	//ModelerView::draw();
-	static GLfloat lightPosition0[] = { 4, 2, -4, 0 };
-	static GLfloat lightDiffuse0[] = { 10,10,10,1 };
-	static GLfloat lightPosition1[] = { -2, 1, 5, 0 };
-	static GLfloat lightDiffuse1[] = { 1, 1, 1, 1 };
+	GLfloat lightPosition0[] = { 4, 2, -4, 0 };
+	GLfloat lightDiffuse0[] = { lightIntensity,lightIntensity,lightIntensity,1 };
+	GLfloat lightPosition1[] = { -2, 1, 5, 0 };
+	GLfloat lightDiffuse1[] = { lightIntensity, lightIntensity, lightIntensity, 1 };
 
 	if (!valid())
 	{
@@ -437,6 +438,7 @@ int main()
 	controls[RIGHTGLENGTH] = ModelerControl("Right Inner Gun Legnth", 0, 3, 0.01f, 1);
 	controls[LEVEL] = ModelerControl("Change the level of detail", 0, 4, 1, 4);
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
+	controls[LIGHT] = ModelerControl("Change the light intensity", 0, 5, 0.01f, 1);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
