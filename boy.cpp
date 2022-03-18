@@ -81,6 +81,7 @@ void Boy::draw()
 	int level = VAL(LEVEL);
 	int color = VAL(COLOR);
 	float lightIntensity = VAL(LIGHT);
+	int mine = VAL(LANDMINE);
 	float color1[4] = {0.0,1.0,0.0,1.0};
 	float color2[4] = {1.0,0.0,0.0,1.0};
 	float color3[4] = {0.0,0.0,1.0,0.0};
@@ -122,72 +123,83 @@ void Boy::draw()
 	
 	GLuint image = loadBMP_custom("ferry.bmp");
 	
+	if (mine == 1) {
+		//draw complex shape
+		setDiffuseColor(0.75f, 0.5f, .0f);
 
-	//draw complex shape
-	setDiffuseColor(0.75f, 0.5f, .0f);
-	//setAmbientColor(0.75f, 0.5f, 0.0f);
-	glBegin(GL_QUADS);
-	glVertex3d(0, 0, 5);
-	glVertex3d(0, 0, 6);
-	glVertex3d(1, 0, 6);
-	glVertex3d(1, 0, 5);
+		glBegin(GL_QUADS);
+		glVertex3d(0, 0, 5);
+		glVertex3d(0, 0, 6);
+		glVertex3d(1, 0, 6);
+		glVertex3d(1, 0, 5);
 
-	//glVertex3d(0, 1, 6);
-	//glVertex3d(0, 0, 6);
-	//glVertex3d(1, 0, 6);
-	//glVertex3d(1, 1, 6);
 
-	//glVertex3d(0, 1, 5);
-	//glVertex3d(0, 1, 6);
-	//glVertex3d(1, 1, 6);
-	//glVertex3d(1, 1, 5);
+		glEnd();
 
-	//glVertex3d(1, 1, 5);
-	//glVertex3d(1, 1, 6);
-	//glVertex3d(1, 0, 6);
-	//glVertex3d(1, 0, 5);
+		glBegin(GL_TRIANGLES);
+		setDiffuseColor(0.75f, 0.5f, 0.0f);
 
-	//glVertex3d(0, 0, 5);
-	//glVertex3d(0, 0, 6);
-	//glVertex3d(0, 1, 6);
-	//glVertex3d(0, 1, 5);
+		glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
+		glVertex3d(0, 1, 6);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
+		glVertex3d(0, 1, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
+		glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
 
-	//glVertex3d(0, 0, 5);
-	//glVertex3d(0, 1, 5);
-	//glVertex3d(1, 1, 5);
-	//glVertex3d(1, 0, 5);
-	glEnd();
+		//setDiffuseColor(0.0f, 0.5f, 0.0f);
+		setDiffuseColor(0.75f, 0.5f, .0f);
+		glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
+		glVertex3d(0, 1, 6);glVertex3d(0, 0, 6);glVertex3d(0.5, 0.5, 8);
+		glVertex3d(0, 0, 6);glVertex3d(1, 0, 6);glVertex3d(0.5, 0.5, 8);
+		glVertex3d(1, 0, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
 
-	glBegin(GL_TRIANGLES);
-	setDiffuseColor(0.75f, 0.5f, 0.0f);
-	
-	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
-	glVertex3d(0, 1, 6);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
-	glVertex3d(0, 1, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 2, 5.5);
-	glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(0.5, 2, 5.5);
+		glVertex3d(0, 0, 5);glVertex3d(0, 0, 6);glVertex3d(-2, 0.5, 5.5);
+		glVertex3d(0, 0, 6);glVertex3d(0, 1, 6);glVertex3d(-2, 0.5, 5.5);
+		glVertex3d(0, 1, 6);glVertex3d(0, 1, 5);glVertex3d(-2, 0.5, 5.5);
+		glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(-2, 0.5, 5.5);
 
-	//setDiffuseColor(0.0f, 0.5f, 0.0f);
-	setDiffuseColor(0.75f, 0.5f, .0f);
-	glVertex3d(0, 1, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
-	glVertex3d(0, 1, 6);glVertex3d(0, 0, 6);glVertex3d(0.5, 0.5, 8);
-	glVertex3d(0, 0, 6);glVertex3d(1, 0, 6);glVertex3d(0.5, 0.5, 8);
-	glVertex3d(1, 0, 6);glVertex3d(1, 1, 6);glVertex3d(0.5, 0.5, 8);
+		glVertex3d(1, 0, 6);glVertex3d(1, 0, 5);glVertex3d(3, 0.5, 5.5);
+		glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(3, 0.5, 5.5);
+		glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(3, 0.5, 5.5);
+		glVertex3d(1, 1, 6);glVertex3d(1, 0, 6);glVertex3d(3, 0.5, 5.5);
 
-	glVertex3d(0, 0, 5);glVertex3d(0, 0, 6);glVertex3d(-2, 0.5, 5.5);
-	glVertex3d(0, 0, 6);glVertex3d(0, 1, 6);glVertex3d(-2, 0.5, 5.5);
-	glVertex3d(0, 1, 6);glVertex3d(0, 1, 5);glVertex3d(-2, 0.5, 5.5);
-	glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(-2, 0.5, 5.5);
+		glVertex3d(0, 0, 5);glVertex3d(1, 0, 5);glVertex3d(0.5, 0.5, 3);
+		glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 0.5, 3);
+		glVertex3d(1, 1, 5);glVertex3d(0, 1, 5);glVertex3d(0.5, 0.5, 3);
+		glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(0.5, 0.5, 3);
+		glEnd();
+	}
+	//surrender
+	if (VAL(SURRENDER) == 1) {
+		setDiffuseColor(1.0f,1.0f,1.0f);
 
-	glVertex3d(1, 0, 6);glVertex3d(1, 0, 5);glVertex3d(3, 0.5, 5.5);
-	glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(3, 0.5, 5.5);
-	glVertex3d(1, 1, 5);glVertex3d(1, 1, 6);glVertex3d(3, 0.5, 5.5);
-	glVertex3d(1, 1, 6);glVertex3d(1, 0, 6);glVertex3d(3, 0.5, 5.5);
+		glBegin(GL_QUADS);
+		glVertex3d(-4, 0, 5.5);
+		glVertex3d(-4.1, 0, 5.5);
+		glVertex3d(-4.1, 2, 5.5);
+		glVertex3d(-4, 2, 5.5);
 
-	glVertex3d(0, 0, 5);glVertex3d(1, 0, 5);glVertex3d(0.5, 0.5, 3);
-	glVertex3d(1, 0, 5);glVertex3d(1, 1, 5);glVertex3d(0.5, 0.5, 3);
-	glVertex3d(1, 1, 5);glVertex3d(0, 1, 5);glVertex3d(0.5, 0.5, 3);
-	glVertex3d(0, 1, 5);glVertex3d(0, 0, 5);glVertex3d(0.5, 0.5, 3);
-	glEnd();
+		glVertex3d(-4.1, 0, 5.5);
+		glVertex3d(-4.1, 0, 5.6);
+		glVertex3d(-4.1, 2, 5.6);
+		glVertex3d(-4.1, 2, 5.5);
+
+		glVertex3d(-4, 0, 5.6);
+		glVertex3d(-4.1, 0, 5.6);
+		glVertex3d(-4.1, 2, 5.6);
+		glVertex3d(-4, 2, 5.6);
+
+		glVertex3d(-4, 0, 5.5);
+		glVertex3d(-4, 2, 5.5);
+		glVertex3d(-4, 2, 5.6);
+		glVertex3d(-4, 0, 5.6);
+
+		glVertex3d(-4, 1, 5.5);
+		glVertex3d(-4, 2, 5.5);
+		glVertex3d(-3, 2, 5.5);
+		glVertex3d(-3, 1, 5.5);
+
+
+		glEnd();
+	}
 	// draw the model
 	setAmbientColor(.0f, .0f, .0f);
 	switch (color) {
@@ -435,6 +447,8 @@ void Boy::draw()
 					}
 					glTranslated(0, 0, VAL(LEFTGAP));
 					drawSphere(1);
+					
+					
 					if (level >= 3) {
 						
 						glRotated(90, 0.0, 1.0, 0.0);
@@ -565,6 +579,8 @@ int main()
 	controls[COLOR] = ModelerControl("Change the color", 0, 3, 1, 3);
 	controls[LIGHT] = ModelerControl("Change the light intensity", 0, 5, 0.01f, 1);
 	controls[ANIMATE] = ModelerControl("Enable animate", 0, 1, 1, 0);
+	controls[LANDMINE] = ModelerControl("Lay mine", 0, 1, 1, 1);
+	controls[SURRENDER] = ModelerControl("Surrender", 0, 1, 1, 0);
 
 	ModelerApplication::Instance()->Init(&createSampleModel, controls, NUMCONTROLS);
 	return ModelerApplication::Instance()->Run();
