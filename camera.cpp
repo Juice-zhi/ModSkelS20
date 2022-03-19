@@ -164,7 +164,9 @@ void Camera::dragMouse( int x, int y )
 			break;
 		}
 	case kActionTwist:
-		// Not implemented
+		{
+			break;
+		}
 	default:
 		break;
 	}

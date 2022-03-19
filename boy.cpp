@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctime>
-#include<chrono>
+#include <chrono>
 
 #define STB_IMAGE_IMPLEMENTATION
 // To make a SampleModel, we inherit off of ModelerView
@@ -32,6 +32,7 @@ ModelerView* createSampleModel(int x, int y, int w, int h, char* label)
 {
     return new Boy(x, y, w, h, label);
 }
+
 int getTime() {
 	using namespace std::chrono;
 	auto now = system_clock::now();
@@ -95,9 +96,7 @@ void Boy::draw()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightDiffuse0);
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPosition1);
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, lightDiffuse1);
-	
-	GLuint image = loadBMP_custom("ferry.bmp");
-	
+		
 	if (mine == 1) {
 		//draw complex shape
 		setDiffuseColor(0.75f, 0.5f, .0f);
